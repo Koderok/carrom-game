@@ -53,7 +53,7 @@ void move(common *data)
 			if( colliding )		// COIN-COIN COLLISION
 			{
 				if(DEBUG)
-					printf("\n\n\n\n\nt ***********************coin %d collided with coin %d\n",i,j);		
+					printf("coin %d collided with coin %d\n",i,j);		
 				change[i].setF(1);											//Mark both i and j as changed(colliding)
 				change[j].setF(1);
 				
@@ -66,7 +66,8 @@ void move(common *data)
 				//store state of colliding coin i in change[i] for later assignment into data->a[i]
 				//change[i].init(data->a[i].getX(), data->a[i].getY(), data->a[j].getVx(), data->a[j].getVy());	//store in change[] after collision
 				
-				change[i].init(data->a[i].getX(), data->a[i].getY(), data->a[i].getVx()+big*(data->a[j].getX()-data->a[i].getX()), data->a[i].getVy()+big*(data->a[j].getY()-data->a[i].getY()));
+				change[i].init(data->a[i].getX(), data->a[i].getY(), data->a[i].getVx()+big*(data->a[j].getX()-data->a[i].getX()), \
+					data->a[i].getVy()+big*(data->a[j].getY()-data->a[i].getY()));
 				
 				if(DEBUG)
 					printf("collision and updating change for coin %d\n",i);
@@ -128,7 +129,8 @@ void move(common *data)
 			}			
 			if(DEBUG)
 				printf("updating changes from change[] for coin %d\n",j);	
-//			data->a[j].init(change[j].getX() + 39*change[j].getVx()*dt, change[j].getY() + 39*change[j].getVy()*dt, change[j].getVx(), change[j].getVy() );	//Change //collided coins
+			//Change collided coins
+			//data->a[j].init(change[j].getX() + 39*change[j].getVx()*dt, change[j].getY() + 39*change[j].getVy()*dt, change[j].getVx(), change[j].getVy() );
 			
 			
 			if(DEBUG)
@@ -149,39 +151,40 @@ void move(common *data)
 		}
 	if(DEBUG)
 			printf("change has been used for coin %d",i);	
-	if(data->server!=89&&data->a[0].getVx()<=.51*unit&&data->a[0].getVy()<=.51*unit&&data->control==0&&data->a[0].getVx()>=-.51*unit&&data->a[0].getVy()>=-.51*unit)//add that if every ball stops then control=1
+	if(data->server!=89&&data->a[0].getVx()<=.51*unit&&data->a[0].getVy()<=.51*unit&&data->control==0 && \
+		 data->a[0].getVx()>=-.51*unit&&data->a[0].getVy()>=-.51*unit)//add that if every ball stops then control=1
 		{
-if(data->a[1].getVx()<=.5*unit&&data->a[1].getVy()<=.5*unit&&data->a[1].getVx()>=-.51*unit&&data->a[1].getVy()>=-.51*unit){
-if(data->a[2].getVx()<=.5*unit&&data->a[2].getVy()<=.5*unit&&data->a[2].getVx()>=-.51*unit&&data->a[2].getVy()>=-.51*unit){
-if(data->a[3].getVx()<=.5*unit&&data->a[3].getVy()<=.5*unit&&data->a[3].getVx()>=-.51*unit&&data->a[3].getVy()>=-.51*unit){
-if(data->a[4].getVx()<=.5*unit&&data->a[4].getVy()<=.5*unit&&data->a[4].getVx()>=-.51*unit&&data->a[4].getVy()>=-.51*unit){
-if(data->a[5].getVx()<=.5*unit&&data->a[5].getVy()<=.5*unit&&data->a[5].getVx()>=-.51*unit&&data->a[5].getVy()>=-.51*unit){
+		if(data->a[1].getVx()<=.5*unit&&data->a[1].getVy()<=.5*unit&&data->a[1].getVx()>=-.51*unit&&data->a[1].getVy()>=-.51*unit){
+		if(data->a[2].getVx()<=.5*unit&&data->a[2].getVy()<=.5*unit&&data->a[2].getVx()>=-.51*unit&&data->a[2].getVy()>=-.51*unit){
+		if(data->a[3].getVx()<=.5*unit&&data->a[3].getVy()<=.5*unit&&data->a[3].getVx()>=-.51*unit&&data->a[3].getVy()>=-.51*unit){
+		if(data->a[4].getVx()<=.5*unit&&data->a[4].getVy()<=.5*unit&&data->a[4].getVx()>=-.51*unit&&data->a[4].getVy()>=-.51*unit){
+		if(data->a[5].getVx()<=.5*unit&&data->a[5].getVy()<=.5*unit&&data->a[5].getVx()>=-.51*unit&&data->a[5].getVy()>=-.51*unit){
 
-	rulesImplement(data);
-		if(data->continueTurn&&data->players==2)		//change turn if continueTurn is 1
-				{data->turn=(data->turn+1)%2;
-					data->side=(data->side+1)%2;			
-				}
-			else if(data->continueTurn&&data->players==2)		//
-			{
-			data->turn=(data->turn+2)%4;	
-			data->side=(data->side+1)%2;
-			if(data->side==0)
-			data->side=2;			
-			}	
-			data->arrowRad=2*unit;data->arrowAng=PI/2;
-		
-data->control=1;
-if(data->server==1)
-data->a[0].init((l+r)/2,d+pDist1+pWidth/2,0,0);
-else if(data->server==0)
-data->a[0].init((l+r)/2,u-pDist1-pWidth/2,0,0);
-//data->turn=(data->turn+1)%2;
-}}}}}
-else
-{
-if(DEBUG)
-printf("ADSSSSSSS");	
-}}				
+			rulesImplement(data);
+				if(data->continueTurn&&data->players==2)		//change turn if continueTurn is 1
+						{data->turn=(data->turn+1)%2;
+							data->side=(data->side+1)%2;			
+						}
+					else if(data->continueTurn&&data->players==2)		//
+					{
+					data->turn=(data->turn+2)%4;	
+					data->side=(data->side+1)%2;
+					if(data->side==0)
+					data->side=2;			
+					}	
+					data->arrowRad=2*unit;data->arrowAng=PI/2;
+				
+		data->control=1;
+		if(data->server==1)
+		data->a[0].init((l+r)/2,d+pDist1+pWidth/2,0,0);
+		else if(data->server==0)
+		data->a[0].init((l+r)/2,u-pDist1-pWidth/2,0,0);
+		//data->turn=(data->turn+1)%2;
+	}}}}}
+	else
+	{
+	if(DEBUG)
+		printf("Coin too far");	
+	}}				
 	
 }
